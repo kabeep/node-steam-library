@@ -11,8 +11,11 @@
     ],
     "rules": {
         "import/extensions": "off",
-        "unicorn/prefer-module": "off",
-        "@typescript-eslint/await-thenable": "off",
+        "no-await-in-loop": "off",
+        "import/no-anonymous-default-export": "off",
+        "@typescript-eslint/no-unsafe-return": "off",
+        "@typescript-eslint/no-unsafe-argument": "off",
+        "@typescript-eslint/no-unsafe-assignment": "off",
         "@typescript-eslint/consistent-type-definitions": [
             "error",
             "interface"

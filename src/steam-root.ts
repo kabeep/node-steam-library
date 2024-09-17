@@ -13,18 +13,18 @@ export default async function steamRoot(): Promise<string> {
     return new Promise((resolve, reject) => {
         // Define the registry path and key name
         const regKey = new Registry({
-            hive: Registry.HKCU,  // HKEY_CURRENT_USER
-            key: registryKey,      // Steam registry key
+            hive: Registry.HKCU, // HKEY_CURRENT_USER
+            key: registryKey, // Steam registry key
         });
 
         // Read the "SteamPath" key from the registry
         regKey.get('SteamPath', function (error, item) {
             if (error) {
-                reject(new NodeError(`${error}`, 'EREGISTRY'));
-            } else if (!item.value) {
-                reject(new NodeError('Steam path is empty', 'EREGISTRY'));
-            } else {
+                reject(new NodeError(error.toString(), 'EREGISTRY'));
+            } else if (item.value) {
                 resolve(item.value);
+            } else {
+                reject(new NodeError('Steam path is empty', 'EREGISTRY'));
             }
         });
     });

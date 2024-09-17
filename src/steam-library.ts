@@ -1,6 +1,6 @@
-import * as VDF from '@node-steam/vdf';
 import { existsSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
+import * as VDF from '@node-steam/vdf';
 import { expection, partialRight } from './helper';
 
 interface SteamLibrary {
@@ -37,10 +37,10 @@ export default function steamLibrary(rootPath: string): SteamLibraryOption[] {
     customExpection(existsSync(libraryFile), 'Steam library file not found');
 
     // Read the file content
-    const content = readFileSync(libraryFile, 'utf-8');
+    const content = readFileSync(libraryFile, 'utf8');
 
     // Parse the VDF content into a structured object
-    const record: SteamLibrary = VDF.parse(content);
+    const record = VDF.parse(content) as SteamLibrary;
 
     // Ensure the parsed content contains valid library folders
     customExpection(record.libraryfolders, 'Invalid library file');
@@ -49,10 +49,14 @@ export default function steamLibrary(rootPath: string): SteamLibraryOption[] {
 
     // Loop through the library folders and extract game IDs and paths
     for (const index in record.libraryfolders) {
-        const item = record.libraryfolders[index];
+        if (Object.hasOwn(record.libraryfolders, index)) {
+            const item = record.libraryfolders[index];
 
-        for (const gameId in item.apps) {
-            apps.push({ library: item.path, id: gameId });
+            for (const gameId in item.apps) {
+                if (Object.hasOwn(item.apps, gameId)) {
+                    apps.push({ library: item.path, id: gameId });
+                }
+            }
         }
     }
 

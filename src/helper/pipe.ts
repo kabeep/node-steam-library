@@ -18,14 +18,13 @@
  *
  * pipeline(5).then(result => console.log(result)); // Output: 10.5
  */
-export default function pipe<T, R>(
-    ...fns: Array<(input: any) => any | Promise<any>>
-): (input: T) => Promise<R> {
+export default function pipe<T, R>(...fns: Array<(input: any) => any | Promise<any>>): (input: T) => Promise<R> {
     return async (input: T): Promise<R> => {
         let result: any = input;
-        for (const fn of fns) {
-            result = await fn(result); // Awaiting each function in case it returns a promise
+        for (const function_ of fns) {
+            result = await function_(result); // Awaiting each function in case it returns a promise
         }
+
         return result as R;
     };
 }

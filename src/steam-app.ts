@@ -1,7 +1,6 @@
-import * as VDF from '@node-steam/vdf';
-import { readFileSync } from 'fs';
-import { existsSync } from 'node:fs';
+import { readFileSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
+import * as VDF from '@node-steam/vdf';
 import { expection, partialRight } from './helper';
 import type { SteamLibraryOption } from './steam-library';
 
@@ -48,15 +47,13 @@ interface SteamAppManifest {
     AppState: AppState;
 }
 
-const remappingManifest = (appState: AppState, { id, library }: SteamLibraryOption) => (
-    {
-        id: appState.appid,
-        name: appState.name,
-        installPath: appState.installdir ? resolve(library, 'steamapps/common', appState.installdir) : undefined,
-        modPath: resolve(library, 'steamapps/workshop/content', id),
-        language: appState.UserConfig?.language,
-    }
-);
+const remappingManifest = (appState: AppState, { id, library }: SteamLibraryOption) => ({
+    id: appState.appid,
+    name: appState.name,
+    installPath: appState.installdir ? resolve(library, 'steamapps/common', appState.installdir) : undefined,
+    modPath: resolve(library, 'steamapps/workshop/content', id),
+    language: appState.UserConfig?.language,
+});
 
 export type SteamAppOption = ReturnType<typeof remappingManifest>;
 
@@ -66,9 +63,9 @@ export default function steamApp({ id, library }: SteamLibraryOption): SteamAppO
 
     customExpection(existsSync(manifestFile), `App ${id} not found in library ${library}`);
 
-    const content = readFileSync(manifestFile, 'utf-8');
+    const content = readFileSync(manifestFile, 'utf8');
 
-    const record: SteamAppManifest = VDF.parse(content);
+    const record = VDF.parse(content) as SteamAppManifest;
     customExpection(record.AppState, 'Invalid manifest file');
 
     return remappingManifest(record.AppState, { id, library });

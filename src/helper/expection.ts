@@ -26,6 +26,5 @@ export default function expection(
     }
 
     const providedMessage: string | undefined = typeof message === 'function' ? message() : message;
-    throw new NodeError(providedMessage || 'Unknown error', code);
+    throw new NodeError(providedMessage ?? 'Unknown error', code);
 }
-

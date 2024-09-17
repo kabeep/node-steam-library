@@ -3,8 +3,6 @@ import steamLibrary, { type SteamLibraryOption } from './steam-library';
 import steamRoot from './steam-root';
 import { pipe } from './helper/index.js';
 
-export type { SteamAppOption, SteamLibraryOption };
-
 /**
  * A function that retrieves the root path of the Steam installation.
  *
@@ -32,14 +30,15 @@ export const getLibrary = pipe<void, SteamLibraryOption[]>(steamRoot, steamLibra
  * @type {Function}
  * @returns {Promise<SteamAppOption[]>} A promise that resolves to an array of `SteamAppOption` objects.
  */
-export const getApps = pipe<void, SteamAppOption[]>(
-    steamRoot,
-    steamLibrary,
-    (apps: SteamLibraryOption[]) => apps.map(steamApp),
+export const getApps = pipe<void, SteamAppOption[]>(steamRoot, steamLibrary, (apps: SteamLibraryOption[]) =>
+    apps.map((app) => steamApp(app)),
 );
 
 export default {
     getLibrary,
     getApps,
     getRootPath,
-}
+};
+
+export { type SteamAppOption } from './steam-app';
+export { type SteamLibraryOption } from './steam-library';
