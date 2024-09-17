@@ -15,7 +15,7 @@ English | [简体中文](README.zh-CN.md)
 ## 📖 Introduction
 
 > [!IMPORTANT]
-> Only Windows.
+> Only Windows supported.
 
 Node module that interacts with the Steam installation on a user's system. This library provides utilities to get Steam
 root path, retrieve Steam library information, and list installed apps.
