@@ -1,0 +1,58 @@
+{
+    "name": "@kabeep/node-steam-library",
+    "version": "0.1.0",
+    "description": "Obtain the installation directory and application list of Steam through the Windows registry.",
+    "main": "./dist/index.js",
+    "module": "./dist/index.mjs",
+    "types": "./dist/index.d.ts",
+    "exports": {
+        ".": {
+            "require": "./dist/index.js",
+            "import": "./dist/index.mjs"
+        }
+    },
+    "files": [
+        "dist"
+    ],
+    "scripts": {
+        "dev": "node dist/index.js",
+        "lint": "xo src/**/*.ts --fix",
+        "pretest": "npm run lint",
+        "watch": "tsup --watch",
+        "build": "npm run clean && tsup --dts",
+        "clean": "rimraf dist",
+        "prepare": "husky"
+    },
+    "dependencies": {
+        "@node-steam/vdf": "^2.2.0",
+        "winreg": "^1.2.5"
+    },
+    "devDependencies": {
+        "@types/node": "^22.5.5",
+        "@types/winreg": "^1.2.36",
+        "husky": "^9.1.6",
+        "rimraf": "^5.0.10",
+        "ts-node": "^10.9.2",
+        "tsup": "^8.2.4",
+        "typescript": "^5.6.2",
+        "xo": "^0.58.0"
+    },
+    "author": "Zhang Zixin (kabeep)",
+    "homepage": "https://github.com/kabeep/node-steam-library#readme",
+    "repository": "git@github.com:kabeep/node-steam-library.git",
+    "bugs": "https://github.com/kabeep/node-steam-library/issue",
+    "keywords": [
+        "nodejs",
+        "steam",
+        "library",
+        "windows",
+        "registry",
+        "typescript",
+        "vdf",
+        "valve"
+    ],
+    "engines": {
+        "node": ">=18"
+    },
+    "license": "MIT"
+}
