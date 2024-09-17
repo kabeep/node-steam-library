@@ -107,6 +107,33 @@ steamLib.getApps
 | modPath     | `string` | Apps mod path     | `"G:\\path\\to\\SteamLibrary\\Counter-Strike: Global Offensive\\steamapps\\workshop\\content\\321"` |
 | language    | `string` | Apps locale       | `"english"`                                                                                         |
 
+## ❌ Error Codes
+
+```javascript
+steamLib.getApps()
+    .then(console.log)
+    .catch((err) => {
+        // string
+        console.log(err.code);
+    });
+```
+
+#### EUNKNOWN
+
+> Unknown error that doesn't fall into any specific category
+
+#### EREGISTRY
+
+> An error related to registry operations, such as failure to read from to the Windows registry.
+
+#### ELIBRARY
+
+> An error related to Steam library operations, such as issues with finding or parsing the Steam library folders.
+
+#### EMANIFEST
+
+> An error related to manifest files, such as missing or malformed Steam manifest files.
+
 ## 🔗 Related
 
 - [vdf](https://github.com/node-steam/vdf) - Module to convert Valve's KeyValue format to JSON and back.

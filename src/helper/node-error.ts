@@ -2,8 +2,10 @@
  * Type representing possible error codes for `NodeError`.
  *
  * @typedef {string} NodeErrorCode
- * @property {'EUNKNOWN'} EUNKNOWN - Represents an unknown error.
- * @property {'EREGISTRY'} EREGISTRY - Represents a registry-related error.
+ * @property {'EUNKNOWN'} EUNKNOWN - Represents an unknown error that doesn't fall into any specific category.
+ * @property {'EREGISTRY'} EREGISTRY - Represents an error related to registry operations, such as failure to read from or write to the Windows registry.
+ * @property {'ELIBRARY'} ELIBRARY - Represents an error related to Steam library operations, such as issues with finding or parsing the Steam library folders.
+ * @property {'EMANIFEST'} EMANIFEST - Represents an error related to manifest files, such as missing or malformed Steam manifest files.
  */
 export type NodeErrorCode = 'EUNKNOWN' | 'EREGISTRY' | 'ELIBRARY' | 'EMANIFEST';
 

@@ -106,6 +106,33 @@ steamLib.getApps
 | modPath     | `string` | 应用模组路径      | `"G:\\path\\to\\SteamLibrary\\Counter-Strike: Global Offensive\\steamapps\\workshop\\content\\321"` |
 | language    | `string` | 应用环境语言      | `"english"`                                                                                         |
 
+## ❌ Error Codes
+
+```javascript
+steamLib.getApps()
+    .then(console.log)
+    .catch((err) => {
+        // string
+        console.log(err.code);
+    });
+```
+
+#### EUNKNOWN
+
+> 不属于任何特定类别的未知错误
+
+#### EREGISTRY
+
+> 与注册表操作有关的错误，例如无法从Windows注册表中读取。
+
+#### ELIBRARY
+
+> 与Steam库操作相关的错误，例如查找或解析Steam库文件夹的问题。
+
+#### EMANIFEST
+
+> 与清单文件相关的错误，例如丢失或格式错误的Steam清单文件。
+
 ## 🔗 关联库
 
 - [vdf](https://github.com/node-steam/vdf) - 用于 Valve 的键值对与 JSON 相互转换的模块。
